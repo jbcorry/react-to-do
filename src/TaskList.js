@@ -1,13 +1,14 @@
 import React from 'react';
 import Task from './Task.js';
+import {useSelector, useDispatch} from 'react-redux';
 
 const TaskList = () => {
-
+    const tasks = useSelector(state => state.tasks);
     return(
         <div>
-            <Task name="Clean Room" dueBy="Tomorrow" key="1" />
-            <Task name="Do Dishes" dueBy="Tonight" key="1" />
-            <Task name="Eat Food" dueBy="Lunch" key="1" />
+            {tasks.map(task => (
+                <Task name={task.name} dueBy={task.dueBy} key={task.id} />
+            ))}
         </div>
     );
 }
