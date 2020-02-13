@@ -1,28 +1,21 @@
 import React, {Component} from 'react'
 import Rainbow from '../hoc/Rainbow'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+import Pokeball from '../pokeball2.jpg'
+import { connect } from 'react-redux'
 
 class About extends Component {
-    state = {
-        posts: []
-    }
-    componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(res => {
-                console.log(res);
-                this.setState({
-                    posts: res.data.slice(0,10)
-                })
-            })
-    }
+
     render () {
-        const { posts } = this.state;
+        const { posts } = this.props;
         const postList = posts.length ? (
             posts.map(post => {
                 return (
                     <div className="post card" key={post.id}>
+                        <img src={Pokeball} alt="a pokeball"/>
                         <div className="card-content">
-                            <span className="card-title">{post.title}</span>
+                            <Link to={'/' + post.id}><span className="card-title">{post.title}</span></Link>
                             <p>{post.body}</p>
                         </div>
                     </div>
@@ -32,7 +25,7 @@ class About extends Component {
             <div className="center">No posts yet</div>
         )
         return (
-            <div className="container">
+            <div className="about container">
                 <h4 className="center">About</h4>
                 {postList}
             </div>
@@ -40,4 +33,10 @@ class About extends Component {
     }
 }
 
-export default Rainbow(About);
+const mapStateToProps = (state) => {
+    return {
+        posts: state.posts
+    }
+}
+
+export default connect(mapStateToProps)(Rainbow(About));
