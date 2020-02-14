@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.about .post img {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  left: -100px;
+}
+.about .post {
+  overflow: hidden;
+  padding-left: 100px;
+}
